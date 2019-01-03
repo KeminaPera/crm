@@ -28,11 +28,14 @@
     			<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
     			<prop key="hibernate.show_sql">true</prop>
     			<prop key="hibernate.format_sql">true</prop>
+    			<!-- <prop key="hibernate.hbm2ddl.auto">update</prop> -->
     		</props>
     	</property>
     	<property name="mappingResources">
     		<list>
     			<value>com/itheima/crm/domain/customer.hbm.xml</value>
+    			<value>com/itheima/crm/domain/user.hbm.xml</value>
+    			<value>com/itheima/crm/domain/basedict.hbm.xml</value>
     		</list>
     	</property>
     </bean>
@@ -46,14 +49,34 @@
     <bean id="customerAction" class="com.itheima.crm.web.action.CustomerAction">
     	<property name="customerService" ref="customerService"/>
     </bean>
+    <bean id="userAction" class="com.itheima.crm.web.action.UserAction">
+    	<property name="userService" ref="userService"/>
+    </bean>
     
     <!-- 配置service -->
     <bean id="customerService" class="com.itheima.crm.service.impl.CustomerServiceImpl">
     	<property name="customerDao" ref="customerDao"/>
     </bean>
-    
+    <bean id="userService" class="com.itheima.crm.service.impl.UserServiceImpl">
+    	<property name="userDao" ref="userDao"/>
+    </bean>
+     
     <!-- 配置dao -->
     <bean id="customerDao" class="com.itheima.crm.dao.impl.CustomerDaoImpl">
+    	<property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="userDao" class="com.itheima.crm.dao.impl.UserDaoImpl">
+    	<property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <!-- 配置数据字典模块的bean -->
+    <bean name="basedictAction" class="com.itheima.crm.web.action.BasedictAction" scope="prototype">
+    	<property name="basedictService" ref="basedictService"/>
+    </bean>
+    <bean name="basedictService" class="com.itheima.crm.service.impl.BasedictServiceImpl">
+    	<property name="basedictDao" ref="basedictDao"/>
+    </bean>
+    <bean name="basedictDao" class="com.itheima.crm.dao.impl.BasedictDaoImpl">
     	<property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 </beans>

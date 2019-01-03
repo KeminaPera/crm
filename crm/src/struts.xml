@@ -3,7 +3,27 @@
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
+	<!-- 配置常量 -->
+	<constant name="struts.multipart.maxSize" value="5242880"></constant>
 	<package name="crm" extends="struts-default">
-		<action name="customerAction" class="com.itheima.crm.web.action.CustomerAction"></action>
+		<action name="customerAction_*" class="com.itheima.crm.web.action.CustomerAction" method="{1}">
+			<result name="addSuccess" type="redirectAction">customerAction_findAll</result>
+			<result name="list">/jsp/customer/list.jsp</result>
+			<result name="input">/jsp/customer/add.jsp</result>
+			<result name="deleteSuccess" type="redirectAction">customerAction_findAll</result>
+			<result name="updateUI">/jsp/customer/edit.jsp</result>
+
+			<interceptor-ref name="defaultStack">
+				<param name="fileUpload.maximumSize">1024*1024</param>
+				<param name="fileUpload.allowedExtensions">.jpg</param>
+			</interceptor-ref>
+		</action>
+		<action name="userAction_*" class="com.itheima.crm.web.action.UserAction" method="{1}">
+			<result name="registUI">/registe.jsp</result>
+			<result name="login">/login.jsp</result>
+			<result name="success" type="redirect">/index.jsp</result>
+		</action> 
+		
+		<action name="BaseDict_*" class="com.itheima.crm.web.action.BasedictAction" method="{1}"></action>
 	</package>
 </struts>

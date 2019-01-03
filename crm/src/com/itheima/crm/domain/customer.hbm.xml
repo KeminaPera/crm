@@ -10,11 +10,17 @@
 		<property name="cust_name"/>
 		<property name="cust_user_id"/>
 		<property name="cust_create_id"/>
-		<property name="cust_source"/>
+		<!-- 修改客户实体与数据字典实体的映射关系 -->
+		<!-- <property name="cust_source"/>
 		<property name="cust_industry"/>
-		<property name="cust_level"/>
+		<property name="cust_level"/> -->
 		<property name="cust_linkman"/>
 		<property name="cust_phone"/>
 		<property name="cust_mobile"/>
+		<property name="cust_image"/>
+		
+		<many-to-one name="cust_source" class="com.itheima.crm.domain.BaseDict" column="cust_source"/>
+		<many-to-one name="cust_industry" class="com.itheima.crm.domain.BaseDict" column="cust_industry"/>
+		<many-to-one name="cust_level" class="com.itheima.crm.domain.BaseDict" column="cust_level"/>
 	</class>
 </hibernate-mapping>

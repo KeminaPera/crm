@@ -107,7 +107,7 @@ A.active {
 			<TBODY>
 				<TR>
 					<TD width=15><IMG src="images/new_005.jpg" border=0></TD>
-					<TD align=middle width=180 background=images/new_006.jpg
+					<TD align=center width=180 background=images/new_006.jpg
 						height=35><B>人力资源 －功能菜单</B></TD>
 					<TD width=15><IMG src="images/new_007.jpg" border=0></TD>
 				</TR>
@@ -134,7 +134,7 @@ A.active {
 														target=main>－ 新增客户</A></TD>
 												</TR>
 												<TR> 
-													<TD class=menuSmall><A class=style2 href="customerServlet?method=list"
+													<TD class=menuSmall><A class=style2 href="${pageContext.request.contextPath }/customerAction_findAll.action"
 														target=main>－ 客户列表</A></TD>
 												</TR>
 												

@@ -1,21 +1,49 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<s:actionerror/>
+<s:fielderror></s:fielderror>
 <TITLE>添加客户</TITLE> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <LINK href="${pageContext.request.contextPath }/css/Style.css" type=text/css rel=stylesheet>
 <LINK href="${pageContext.request.contextPath }/css/Manage.css" type=text/css
 	rel=stylesheet>
-
-
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//通过异步加载客户来源信息
+	$.post("${pageContext.request.contextPath}/BaseDict_findByDictTypeCode.action",
+			{dict_type_code : "002"},function(data){
+				$(data).each(function(i, obj){
+					$("#cust_source").append("<option value='"+obj.dict_id+"'>"+obj.dict_item_name+"</option>");					
+				});
+			},"json");
+	//通过异步加载客户等级信息
+	$.post("${pageContext.request.contextPath}/BaseDict_findByDictTypeCode.action",
+			{dict_type_code : "006"},function(data){
+				$(data).each(function(i, obj){
+					$("#cust_level").append("<option value='"+obj.dict_id+"'>"+obj.dict_item_name+"</option>");					
+				});
+			},"json");
+	//通过异步加载所属行业信息
+	$.post("${pageContext.request.contextPath}/BaseDict_findByDictTypeCode.action",
+			{dict_type_code : "001"},function(data){
+				$(data).each(function(i, obj){
+					$("#cust_industry").append("<option value='"+obj.dict_id+"'>"+obj.dict_item_name+"</option>");					
+				});
+			},"json");
+});
+</script>
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
 </HEAD>
 <BODY>
+	<s:actionerror/>
 	<FORM id=form1 name=form1
-		action="${pageContext.request.contextPath }/customerAction"
-		method=post>
+		action="${pageContext.request.contextPath }/customerAction_add.action"
+		method=post enctype="multipart/form-data">
 		
 
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
@@ -33,7 +61,7 @@
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
 			<TBODY>
 				<TR>
-					<TD width=15 background=${pageContext.request.contextPath }/images/new_022.jpg><IMG
+					<TD width=15 background="${pageContext.request.contextPath }/images/new_022.jpg"><IMG
 						src="${pageContext.request.contextPath }/images/new_022.jpg" border=0></TD>
 					<TD vAlign=top width="100%" bgColor=#ffffff>
 						<TABLE cellSpacing=0 cellPadding=5 width="100%" border=0>
@@ -56,8 +84,9 @@
 								</td>
 								<td>客户级别 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="cust_level">
+									<select id="cust_level" style="WIDTH: 180px" name="cust_level.dict_id">
+									<option value="">--请选择--</option>
+									</select>
 								</td>
 							</TR>
 							
@@ -65,13 +94,15 @@
 								
 								<td>信息来源 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="cust_source">
+									<select id="cust_source" name="cust_source.dict_id" style="WIDTH: 180px">
+										<option value="">--请选择--</option>
+									</select>
 								</td>
 								<td>所属行业 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="cust_industry">
+									<select id="cust_industry" name="cust_industry.dict_id" style="WIDTH: 180px">
+										<option value="">--请选择--</option>
+									</select>
 								</td>
 							</TR>
 							
@@ -88,6 +119,11 @@
 								<INPUT class=textbox id=sChannel2
 														style="WIDTH: 180px" maxLength=50 name="cust_mobile">
 								</td>
+							</TR>
+							<TR>
+								<!-- 文件上传项 -->
+								<td>资质文件 ：</td>
+								<td colspan="2"><input type="file" name="upload"/></td>
 							</TR>
 							
 							
@@ -111,7 +147,7 @@
 				<TR>
 					<TD width=15><IMG src="${pageContext.request.contextPath }/images/new_024.jpg"
 						border=0></TD>
-					<TD align=middle width="100%"
+					<TD align=center width="100%"
 						background="${pageContext.request.contextPath }/images/new_025.jpg" height=15></TD>
 					<TD width=15><IMG src="${pageContext.request.contextPath }/images/new_026.jpg"
 						border=0></TD>
