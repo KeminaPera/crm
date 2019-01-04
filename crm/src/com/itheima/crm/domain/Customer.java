@@ -22,6 +22,7 @@ public class Customer {
 	private BaseDict cust_source;
 	private BaseDict cust_industry;
 	private BaseDict cust_level;
+	private CustomerDetail customerDetail;
 	public Long getCust_id() {
 		return cust_id;
 	}
@@ -87,6 +88,12 @@ public class Customer {
 	}
 	public void setCust_image(String cust_image) {
 		this.cust_image = cust_image;
+	}
+	public CustomerDetail getCustomerDetail() {
+		return customerDetail;
+	}
+	public void setCustomerDetail(CustomerDetail customerDetail) {
+		this.customerDetail = customerDetail;
 	}
 	
 	

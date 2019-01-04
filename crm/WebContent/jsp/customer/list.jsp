@@ -100,7 +100,7 @@
 													<TD><s:property value="cust_phone"/></TD>
 													<TD><s:property value="cust_mobile"/></TD>
 													<TD>
-													<a href="${pageContext.request.contextPath }/customerAction_toUpdateUI.action?cust_id=<s:property value="cust_id"/>">修改</a>
+													<a href="${pageContext.request.contextPath }/customerDetail_toEditUI.action?customer.cust_id=<s:property value="cust_id"/>">修改</a>
 													&nbsp;&nbsp;
 													<a href="${pageContext.request.contextPath }/customerAction_deleteById.action?cust_id=<s:property value="cust_id" />">删除</a>
 													</TD>

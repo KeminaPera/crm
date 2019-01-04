@@ -1,5 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,22 +9,42 @@
 <LINK href="${pageContext.request.contextPath }/css/Style.css" type=text/css rel=stylesheet>
 <LINK href="${pageContext.request.contextPath }/css/Manage.css" type=text/css
 	rel=stylesheet>
-
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$.post("${pageContext.request.contextPath}/BaseDict_findByDictTypeCode",{"dict_type_code":"006"},function(data){
+			$.each(data,function(i,obj){
+				$("#cust_level").append("<option value='"+obj.dict_id+"'>"+obj.dict_item_name+"</option>");
+			});
+		},"json"); 
+		var level = "${model.customer.cust_level.dict_id}";
+		alert(level);
+		$("#cust_level option[value='level']").prop("selected","selected");
+		$.post("${pageContext.request.contextPath}/BaseDict_findByDictTypeCode",{"dict_type_code":"002"},function(data){
+			$.each(data,function(i,obj){
+				$("#cust_source").append("<option value='"+obj.dict_id+"'>"+obj.dict_item_name+"</option>");
+			});
+		},"json");
+		alert("${model.customer.cust_source.dict_id}");
+		$("#cust_source option[value='${model.customer.cust_source.dict_id}']").prop("selected","selected");
+	});
+</script>
 
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
 </HEAD>
 <BODY>
+	<s:debug/>
 	<FORM id=form1 name=form1
 		action="${pageContext.request.contextPath }/customerServlet?method=editsubmit"
 		method=post>
-		<input type="hidden" name="custId" value="${customer.custId }"/>
+		<input type="hidden" name="custId" value="#"/>
 
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
 			<TBODY>
 				<TR>
 					<TD width=15><IMG src="${pageContext.request.contextPath }/images/new_019.jpg"
 						border=0></TD>
-					<TD width="100%" background=${pageContext.request.contextPath }/images/new_020.jpg
+					<TD width="100%" background="${pageContext.request.contextPath }/images/new_020.jpg"
 						height=20></TD>
 					<TD width=15><IMG src="${pageContext.request.contextPath }/images/new_021.jpg"
 						border=0></TD>
@@ -33,7 +54,7 @@
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
 			<TBODY>
 				<TR>
-					<TD width=15 background=${pageContext.request.contextPath }/images/new_022.jpg><IMG
+					<TD width=15 background="${pageContext.request.contextPath }/images/new_022.jpg"><IMG
 						src="${pageContext.request.contextPath }/images/new_022.jpg" border=0></TD>
 					<TD vAlign=top width="100%" bgColor=#ffffff>
 						<TABLE cellSpacing=0 cellPadding=5 width="100%" border=0>
@@ -49,25 +70,27 @@
 								<td>客户名称：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-											style="WIDTH: 180px" maxLength=50 name="custName" value="${customer.custName }">
+											style="WIDTH: 180px" maxLength=50 name="custName" value="<s:property value="customer.cust_name"/>">
 								</td>
 								<td>客户级别 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="custLevel" value="${customer.custLevel }">
+								<select name="cust_level" style="WIDTH: 180px" class="textbox" id="cust_level">
+									<option value="">--请选择--</option>
+								</select>
 								</td>
 							</TR>
 							
 							<TR>
 								<td>信息来源：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="custSource" value="${customer.custSource }">
+									<select name="cust_source" class="textbox"id="cust_source" style="WIDTH: 180px">
+										<option value="">--请选择--</option>
+									</select>
 								</td>
 								<td>联系人：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="custLinkman" value="${customer.custLinkman }">
+														style="WIDTH: 180px" maxLength=50 name="custLinkman" value="<%-- ${customer.custLinkman } --%>">
 								</td>
 							</TR>
 							<TR>
@@ -76,12 +99,12 @@
 								<td>固定电话 ：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="custPhone" value="${customer.custPhone }">
+														style="WIDTH: 180px" maxLength=50 name="cust_phone" value="<s:property value="customer.cust_phone"/>">
 								</td>
 								<td>移动电话 ：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="custMobile" value="${customer.custMobile }">
+														style="WIDTH: 180px" maxLength=50 name="cust_mobile" value="<s:property value="customer.cust_mobile"/>">
 								</td>
 							</TR>
 							
@@ -89,24 +112,24 @@
 								<td>联系地址 ：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="custAddress" value="${customerDetail.custAddress }">
+														style="WIDTH: 180px" maxLength=50 name="custAddress" value="<%-- ${customerDetail.custAddress } --%>">
 								</td>
 								<td>邮政编码 ：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="custZip" value="${customerDetail.custZip }">
+														style="WIDTH: 180px" maxLength=50 name="custZip" value="<%-- ${customerDetail.custZip } --%>">
 								</td>
 							</TR>
 							<TR>
 								<td>客户传真 ：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="custFax" value="${customerDetail.custFax }">
+														style="WIDTH: 180px" maxLength=50 name="custFax" value="<%-- ${customerDetail.custFax } --%>">
 								</td>
 								<td>客户网址 ：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="custWebsite" value="${customerDetail.custWebsite }">
+														style="WIDTH: 180px" maxLength=50 name="custWebsite" value="<%-- ${customerDetail.custWebsite } --%>">
 								</td>
 							</TR>
 							<tr>
@@ -129,7 +152,7 @@
 				<TR>
 					<TD width=15><IMG src="${pageContext.request.contextPath }/images/new_024.jpg"
 						border=0></TD>
-					<TD align=middle width="100%"
+					<TD align="center" width="100%"
 						background="${pageContext.request.contextPath }/images/new_025.jpg" height=15></TD>
 					<TD width=15><IMG src="${pageContext.request.contextPath }/images/new_026.jpg"
 						border=0></TD>

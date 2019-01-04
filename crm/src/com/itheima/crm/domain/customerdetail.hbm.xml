@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.itheima.crm.domain.CustomerDetail" table="cst_customer_detail">
+		<id name="cust_id" column="cust_id">
+			<generator class="foreign">
+				<param name="property">customer</param>
+			</generator>
+		</id>
+		
+		<property name="cust_region" column="cust_region"/>
+		<property name="cust_zip" column="cust_zip"/>
+		<property name="cust_address" column="cust_address"/>
+		<property name="cust_fax" column="cust_fax"/>
+		<property name="cust_website" column="cust_website"/>
+		<property name="cust_licence" column="cust_licence"/>
+		<property name="cust_corporation" column="cust_corporation"/>
+		<property name="cust_capital" column="cust_capital"/>
+		<property name="cust_bank" column="cust_bank"/>
+		<property name="cust_memo" column="cust_memo"/>
+		
+		<one-to-one name="customer" class="com.itheima.crm.domain.Customer" cascade="none" constrained="true"/>
+		
+	</class>
+</hibernate-mapping>

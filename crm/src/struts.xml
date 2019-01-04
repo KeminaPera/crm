@@ -6,6 +6,7 @@
 	<!-- 配置常量 -->
 	<constant name="struts.multipart.maxSize" value="5242880"></constant>
 	<package name="crm" extends="struts-default">
+		<!-- 配置CustomerAction -->
 		<action name="customerAction_*" class="com.itheima.crm.web.action.CustomerAction" method="{1}">
 			<result name="addSuccess" type="redirectAction">customerAction_findAll</result>
 			<result name="list">/jsp/customer/list.jsp</result>
@@ -18,12 +19,17 @@
 				<param name="fileUpload.allowedExtensions">.jpg</param>
 			</interceptor-ref>
 		</action>
+		<!-- 配置CustomerDetailAction -->
+		<action name="customerDetail_*" class="com.itheima.crm.web.action.CustomerDetaiAction" method="{1}">
+			<result name="editUI">/jsp/customer/edit.jsp</result>
+		</action>
+		<!-- 配置UserAction -->
 		<action name="userAction_*" class="com.itheima.crm.web.action.UserAction" method="{1}">
 			<result name="registUI">/registe.jsp</result>
 			<result name="login">/login.jsp</result>
 			<result name="success" type="redirect">/index.jsp</result>
 		</action> 
-		
+		<!-- 配置BaseDictAction -->
 		<action name="BaseDict_*" class="com.itheima.crm.web.action.BasedictAction" method="{1}"></action>
 	</package>
 </struts>
