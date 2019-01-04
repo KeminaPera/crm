@@ -57,5 +57,4 @@ public class CustomerDaoImpl extends HibernateDaoSupport implements CustomerDao 
 	public void update(Customer customer) {
 		
 	}
-
 }

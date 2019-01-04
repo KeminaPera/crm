@@ -43,6 +43,9 @@ public class CustomerServiceImpl implements CustomerService {
 		pageModel.setTotalPageCount(totalPageSize);
 		//查询该页的所有数据
 		List<Customer> list = customerDao.getList(detachedCriteria, (curPage - 1)*pageSize, pageSize);
+		for (Customer customer : list) {
+			System.out.println(customer.getCust_name());
+		}
 		pageModel.setList(list);
 		return pageModel;
 	}

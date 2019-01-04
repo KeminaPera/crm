@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 import com.itheima.crm.domain.Customer;
 import com.itheima.crm.domain.PageModel;
@@ -83,6 +85,24 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 	public String findAll() {
 		System.out.println("---------------------------"+curPage);
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Customer.class);
+		System.out.println("----"+customer.getCust_name()+"----");
+		System.out.println("".equals(customer.getCust_name()));
+		System.out.println(customer.getCust_name() != null);
+		if(customer.getCust_level() != null) {
+		System.out.println("----"+customer.getCust_level().getDict_id()+"----");
+		}
+		if(customer.getCust_source() != null) {
+		System.out.println("----"+customer.getCust_source().getDict_id()+"----");
+		}
+		if(customer.getCust_name() != null && !"".equals(customer.getCust_name())) {
+			detachedCriteria.add(Restrictions.like("cust_name", customer.getCust_name()+"%"));
+		}
+		if(customer.getCust_level() != null && customer.getCust_level().getDict_id() != null) {
+			detachedCriteria.add(Restrictions.eq("cust_level.dict_id", customer.getCust_level().getDict_id()));
+		}
+		if(customer.getCust_source() != null && customer.getCust_source().getDict_id() != null) {
+			detachedCriteria.add(Restrictions.eq("cust_source.dict_id", customer.getCust_source().getDict_id()));
+		}
 		PageModel<Customer> pageModel = customerService.findAll(detachedCriteria, curPage, pageSize);
 		//将其存入值栈，并跳转页面
 		ActionContext.getContext().getValueStack().push(pageModel);

@@ -16,8 +16,24 @@
 			$("#page").val(page);
 		}
 		document.customerForm.submit();
-		
 	}
+	$(function(){
+		$.post("${pageContext.request.contextPath}/BaseDict_findByDictTypeCode",{"dict_type_code":"002"},function(data){
+			$(data).each(function(i,obj){
+				$("#cust_source").append("<option value='"+obj.dict_id+"'>"+obj.dict_item_name+"</option>");
+			});
+				/* 开始使用prop不起作用，换成attr好了，但还想不明白为什么？？？？ */
+				$("#cust_source option[value='${model.cust_source.dict_id}']").attr("selected","selected");
+		},"json");
+	});
+	$(function(){
+		$.post("${pageContext.request.contextPath}/BaseDict_findByDictTypeCode",{"dict_type_code":"006"},function(data){
+			$(data).each(function(i,obj){
+				$("#cust_level").append("<option value='"+obj.dict_id+"'>"+obj.dict_item_name+"</option>");
+			});
+			$("#cust_level option[value='${model.cust_level.dict_id}']").attr("selected","selected");
+		},"json"); 
+	});
 </SCRIPT>
 
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
@@ -63,11 +79,23 @@
 											<TBODY>
 												<TR>
 													<TD>客户名称：</TD>
-													<TD><INPUT class=textbox id=sChannel2
-														style="WIDTH: 80px" maxLength=50 name="custName"></TD>
+													<TD>
+													<INPUT class=textbox id=cust_name style="WIDTH: 80px" maxLength=50 name="cust_name" value="${model.cust_name }">
+													</TD>
+													<TD>客户级别：</TD>
+													<TD>
+													<select class=textbox id="cust_level" style="WIDTH: 80px" name="cust_level.dict_id">
+														<option value="">--请选择--</option>
+													</select></TD>
+													<TD>客户来源：</TD>
+													<TD>
+													<select class=textbox id="cust_source" style="WIDTH: 80px" name="cust_source.dict_id">
+														<option value="">--请选择--</option>
+													</select>
+													</TD>
 													
 													<TD><INPUT class=button id=sButton2 type=submit
-														value=" 筛选 " name=sButton2></TD>
+														value="筛选 " name=sButton2></TD>
 												</TR>
 											</TBODY>
 										</TABLE>
@@ -95,7 +123,7 @@
 													style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
 													<TD><s:property value="cust_name"/></TD>
 													<TD><s:property value="cust_level.dict_item_name"/></TD>
-													<TD><s:property value="cust_industry.dict_item_name"/></TD>
+													<TD><s:property value="cust_source.dict_item_name"/></TD>
 													<TD><s:property value="cust_linkMan"/></TD>
 													<TD><s:property value="cust_phone"/></TD>
 													<TD><s:property value="cust_mobile"/></TD>

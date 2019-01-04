@@ -16,17 +16,14 @@
 			$.each(data,function(i,obj){
 				$("#cust_level").append("<option value='"+obj.dict_id+"'>"+obj.dict_item_name+"</option>");
 			});
+			$("#cust_level option[value='${model.customer.cust_level.dict_id}']").prop("selected","selected");
 		},"json"); 
-		var level = "${model.customer.cust_level.dict_id}";
-		alert(level);
-		$("#cust_level option[value='level']").prop("selected","selected");
 		$.post("${pageContext.request.contextPath}/BaseDict_findByDictTypeCode",{"dict_type_code":"002"},function(data){
 			$.each(data,function(i,obj){
 				$("#cust_source").append("<option value='"+obj.dict_id+"'>"+obj.dict_item_name+"</option>");
 			});
+			$("#cust_source option[value='${model.customer.cust_source.dict_id}']").prop("selected","selected");
 		},"json");
-		alert("${model.customer.cust_source.dict_id}");
-		$("#cust_source option[value='${model.customer.cust_source.dict_id}']").prop("selected","selected");
 	});
 </script>
 
