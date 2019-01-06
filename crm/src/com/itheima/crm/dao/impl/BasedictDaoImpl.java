@@ -12,10 +12,6 @@ import com.itheima.crm.domain.BaseDict;
 public class BasedictDaoImpl extends BaseDaoImpl<BaseDict> implements BasedictDao {
 
 
-	public BasedictDaoImpl() {
-		super(BaseDict.class);
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<BaseDict> findByDictTypeCode(String dict_type_code) {

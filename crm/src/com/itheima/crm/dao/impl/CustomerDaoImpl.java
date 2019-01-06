@@ -7,7 +7,4 @@ import com.itheima.crm.domain.Customer;
  */
 public class CustomerDaoImpl extends BaseDaoImpl<Customer> implements CustomerDao {
 
-	public CustomerDaoImpl() {
-		super(Customer.class);
-	}
 }

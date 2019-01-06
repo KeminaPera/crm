@@ -7,10 +7,6 @@ import com.itheima.crm.domain.User;
 
 public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
 
-	public UserDaoImpl() {
-		super(User.class);
-	}
-
 	/**
 	 * 查找用户
 	 * user : 可以根据user里面提供的字段进行查找用户

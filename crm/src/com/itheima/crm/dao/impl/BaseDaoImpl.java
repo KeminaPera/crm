@@ -1,6 +1,8 @@
 package com.itheima.crm.dao.impl;
 
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -8,6 +10,7 @@ import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import com.itheima.crm.dao.BaseDao;
+import com.itheima.crm.domain.Customer;
 /**
  * 抽取出来的BaseDao接口的实现类
  *
@@ -15,9 +18,16 @@ import com.itheima.crm.dao.BaseDao;
  */
 public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
 	private Class<T> clazz;
-
-	public BaseDaoImpl(Class<T> clazz) {
-		this.clazz = clazz;
+	
+	@SuppressWarnings("unchecked")
+	public BaseDaoImpl() {
+		//获取带有泛型的父类 相当于获取到了BaseDao<Customer>
+		Type genericSuperclass = this.getClass().getGenericSuperclass();
+		//向下类型转换，转换成参数化类型
+		ParameterizedType type = (ParameterizedType) genericSuperclass;
+		//相当于获取到了Customer
+		Type[] actualTypeArguments = type.getActualTypeArguments();
+		this.clazz = (Class<T>) actualTypeArguments[0];
 	}
 
 	@Override

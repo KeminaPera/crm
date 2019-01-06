@@ -7,7 +7,4 @@ import com.itheima.crm.domain.LinkMan;
  */
 public class LinkManDaoImpl extends BaseDaoImpl<LinkMan> implements LinkManDao {
 
-	public LinkManDaoImpl() {
-		super(LinkMan.class);
-	}
 }
