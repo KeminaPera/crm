@@ -2,8 +2,6 @@ package com.itheima.crm.dao.impl;
 
 import java.util.List;
 
-import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
-
 import com.itheima.crm.dao.BasedictDao;
 import com.itheima.crm.domain.BaseDict;
 /**
@@ -11,7 +9,12 @@ import com.itheima.crm.domain.BaseDict;
  * @author Administrator
  *
  */
-public class BasedictDaoImpl extends HibernateDaoSupport implements BasedictDao {
+public class BasedictDaoImpl extends BaseDaoImpl<BaseDict> implements BasedictDao {
+
+
+	public BasedictDaoImpl() {
+		super(BaseDict.class);
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override

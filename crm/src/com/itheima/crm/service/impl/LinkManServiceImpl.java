@@ -1,5 +1,6 @@
 package com.itheima.crm.service.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -64,7 +65,8 @@ public class LinkManServiceImpl implements LinkManService {
 	@Override
 	//根据Id查找联系人
 	public LinkMan findById(Long lkm_id) {
-		return linkManDao.findById(lkm_id);
+		Serializable id = lkm_id;
+		return linkManDao.findById(id);
 	}
 
 	@Override

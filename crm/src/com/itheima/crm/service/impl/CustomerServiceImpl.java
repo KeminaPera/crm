@@ -54,7 +54,7 @@ public class CustomerServiceImpl implements CustomerService {
 	//Service层客户的删除
 	public void deleteById(Long cust_id) {
 		//先查询客户
-		Customer customer = customerDao.findCustomerById(cust_id);
+		Customer customer = customerDao.findById(cust_id);
 		//根据查找到的信息删除图片
 		if(customer != null) {
 			String cust_image = customer.getCust_image();
@@ -78,7 +78,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	//service层根据Id修改客户
 	public Customer findCustomerById(Long cust_id) {
-		return customerDao.findCustomerById(cust_id);
+		return customerDao.findById(cust_id);
 	}
 
 	@Override

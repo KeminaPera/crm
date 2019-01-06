@@ -123,10 +123,7 @@ $(function(){
 							<TR>
 								<!-- 文件上传项 -->
 								<td>资质文件 ：</td>
-								<td ><input type="file" name="upload"/></td>
-								<td>客户简介 ：</td>
-								<td ><input type="text" class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="customerDetail.cust_memo"/></td>
+								<td colspan="2"><input type="file" name="upload"/></td>
 							</TR>
 							
 							<tr>

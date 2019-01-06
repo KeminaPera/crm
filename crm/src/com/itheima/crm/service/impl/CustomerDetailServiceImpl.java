@@ -31,7 +31,7 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
 		 * 这里有问题，类之间耦合太紧密
 		 */
 		//调用customerDao的findById方法
-		Customer customer = customerDao.findCustomerById(cust_id);
+		Customer customer = customerDao.findById(cust_id);
 		CustomerDetail customerDetail = new CustomerDetail();
 		customerDetail.setCustomer(customer);
 		//调用customerDetailDao的findById方法
