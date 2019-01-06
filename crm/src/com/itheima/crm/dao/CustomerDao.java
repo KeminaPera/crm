@@ -19,4 +19,6 @@ public interface CustomerDao {
 	Customer findCustomerById(Long cust_id);
 
 	void update(Customer customer);
+
+	List<Customer> findAll();
 }

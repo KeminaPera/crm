@@ -54,7 +54,16 @@ public class CustomerDaoImpl extends HibernateDaoSupport implements CustomerDao 
 	}
 
 	@Override
+	//dao层修改/更新用户
 	public void update(Customer customer) {
-		
+		System.out.println(customer.getCustomerDetail());
+		this.getHibernateTemplate().update(customer);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	//Dao层查询所有客户
+	public List<Customer> findAll() {
+		return (List<Customer>) this.getHibernateTemplate().find("from Customer");
 	}
 }

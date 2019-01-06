@@ -1,5 +1,7 @@
 package com.itheima.crm.service;
 
+import java.util.List;
+
 import org.hibernate.criterion.DetachedCriteria;
 
 import com.itheima.crm.domain.Customer;
@@ -15,4 +17,6 @@ public interface CustomerService {
 	void update(Customer customer);
 
 	Customer findCustomerById(Long cust_id);
+
+	List<Customer> findAll();
 }

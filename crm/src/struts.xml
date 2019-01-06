@@ -5,7 +5,7 @@
 <struts>
 	<!-- 配置常量 -->
 	<constant name="struts.multipart.maxSize" value="5242880"></constant>
-	<package name="crm" extends="struts-default">
+	<package name="crm" extends="struts-default" namespace="/">
 		<!-- 配置CustomerAction -->
 		<action name="customerAction_*" class="com.itheima.crm.web.action.CustomerAction" method="{1}">
 			<result name="addSuccess" type="redirectAction">customerAction_findAll</result>
@@ -13,6 +13,7 @@
 			<result name="input">/jsp/customer/add.jsp</result>
 			<result name="deleteSuccess" type="redirectAction">customerAction_findAll</result>
 			<result name="updateUI">/jsp/customer/edit.jsp</result>
+			<result name="updateSuccess" type="redirectAction">customerAction_findAll</result>
 
 			<interceptor-ref name="defaultStack">
 				<param name="fileUpload.maximumSize">1024*1024</param>
@@ -31,5 +32,14 @@
 		</action> 
 		<!-- 配置BaseDictAction -->
 		<action name="BaseDict_*" class="com.itheima.crm.web.action.BasedictAction" method="{1}"></action>
+		<!-- 配置联系人Action -->
+		<action name="linkMan_*" class="com.itheima.crm.web.action.LinkManAction" method="{1}">
+			<result name="findAll">/jsp/linkman/list.jsp</result>
+			<result name="addUI">/jsp/linkman/add.jsp</result>
+			<result name="addSuccess" type="redirectAction">linkMan_findAll</result>
+			<result name="deleteSuccess" type="redirectAction">linkMan_findAll</result>
+			<result name="editUI">/jsp/linkman/edit.jsp</result>
+			<result name="editSuccess" type="redirectAction">linkMan_findAll</result>
+		</action>
 	</package>
 </struts>

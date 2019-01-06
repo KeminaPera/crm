@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import com.itheima.crm.domain.Customer;
@@ -126,9 +125,11 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 		return "updateUI";
 	}
 	/**
-	 * 修改客户
+	 * 修改/更新客户
 	 */
 	public String update() {
+		System.out.println(customer.getCust_level().getDict_id()+"-------");
+		System.out.println(customer.getCust_source().getDict_id()+"=======");
 		customerService.update(customer);
 		return "updateSuccess";
 	}

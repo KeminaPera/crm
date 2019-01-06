@@ -16,7 +16,7 @@ public class CustomerDetail {
 	private Long cust_capital;
 	private String cust_bank;
 	private String cust_memo;
-	private Customer customer;
+	private Customer customer = new Customer();
 	
 	public Long getCust_id() {
 		return cust_id;

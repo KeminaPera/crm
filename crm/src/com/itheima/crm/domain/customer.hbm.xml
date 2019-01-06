@@ -14,11 +14,16 @@
 		<!-- <property name="cust_source"/>
 		<property name="cust_industry"/>
 		<property name="cust_level"/> -->
-		<property name="cust_linkman"/>
+		<!-- 修改客户实体与联系人的映射关系 -->
+		<!-- <property name="cust_linkman"/> -->
 		<property name="cust_phone"/>
 		<property name="cust_mobile"/>
 		<property name="cust_image"/>
 		
+		<set name="linkMans" cascade="delete">
+			<key column="lkm_cust_id"/>
+			<one-to-many class="com.itheima.crm.domain.LinkMan"/>
+		</set>
 		<many-to-one name="cust_source" class="com.itheima.crm.domain.BaseDict" column="cust_source"/>
 		<many-to-one name="cust_industry" class="com.itheima.crm.domain.BaseDict" column="cust_industry"/>
 		<many-to-one name="cust_level" class="com.itheima.crm.domain.BaseDict" column="cust_level"/>

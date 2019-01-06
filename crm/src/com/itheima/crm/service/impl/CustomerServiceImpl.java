@@ -64,20 +64,27 @@ public class CustomerServiceImpl implements CustomerService {
 					file.delete();
 				}
 			}
+			//删除完图片后删除客户
+			customerDao.delete(customer);
 		}
-		//删除完图片后删除客户
-		customerDao.delete(customer);
 	}
 
 	@Override
+	//service层修改、更新用户
 	public void update(Customer customer) {
-		
 		customerDao.update(customer);
 	}
 
 	@Override
+	//service层根据Id修改客户
 	public Customer findCustomerById(Long cust_id) {
 		return customerDao.findCustomerById(cust_id);
+	}
+
+	@Override
+	//service层查询所有客户
+	public List<Customer> findAll() {
+		return customerDao.findAll();
 	}
 
 }
